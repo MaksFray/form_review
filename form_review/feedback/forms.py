@@ -1,11 +1,27 @@
 from django import forms
+from .models import Feedback
 
-
-class FeedbackForm(forms.Form):
-    name = forms.CharField(label='Name', max_length=20, min_length=4, error_messages={
-        'max_length': "Too much symbols",
-        'min_length': "Not enough symbols",
-    })
-    second_name = forms.CharField()
-    rating = forms.IntegerField(label='Rating', max_value=5, min_value=1)
-    feedback = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 40}))
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        # fields = ['name', 'second_name', 'feedback', 'rating']
+        fields = '__all__'
+        # exclude = ['name']
+        labels = {
+            'name': 'Name',
+            'second_name': 'Second name',
+            'rating': 'Rating',
+            'feedback': 'Feedback',
+        }
+        error_messages = {
+            'name':{
+                'max_length': 'Too many symbols',
+                'min_length': 'Too few symbols',
+                'required': 'Must not be empty',
+            },
+            'second_name': {
+                'max_length': 'Too many symbols',
+                'min_length': 'Too few symbols',
+                'required': 'Must not be empty',
+            }
+        }
