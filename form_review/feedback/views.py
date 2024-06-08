@@ -18,3 +18,15 @@ def index(request):
 
 def done(request):
     return render(request, 'feedback/done.html')
+
+def update_feedback(request, id_feedback):
+    feed = Feedback.objects.get(id=id_feedback)
+
+    if request.method == "POST":
+        form = FeedbackForm(request.POST, instance=feed)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/done')
+    else:
+        form = FeedbackForm(instance=feed)
+    return render(request, 'feedback/feedback.html', context={'form': form})
