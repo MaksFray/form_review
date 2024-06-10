@@ -19,19 +19,10 @@ class FeedBackView(View):
             return HttpResponseRedirect('/done')
 
 
-def index(request):
-    if request.method == "POST":
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/done')
-    else:
-        form = FeedbackForm()
-    return render(request, 'feedback/feedback.html', context={'form': form})
+class DoneView(View):
+    def get(self, request):
+        return render(request, 'feedback/done.html')
 
-
-def done(request):
-    return render(request, 'feedback/done.html')
 
 
 def update_feedback(request, id_feedback):

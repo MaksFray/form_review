@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.FeedBackView.as_view()),
-    path('done', views.done),
+    path('done', views.DoneView.as_view()),
     path('<int:id_feedback>', views.update_feedback),
 ]
