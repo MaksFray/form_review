@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .forms import FeedbackForm
 from .models import Feedback
 from django.views import View
-
+from django.views.generic.base import TemplateView
 
 # Create your views here.
 
@@ -19,9 +19,8 @@ class FeedBackView(View):
             return HttpResponseRedirect('/done')
 
 
-class DoneView(View):
-    def get(self, request):
-        return render(request, 'feedback/done.html')
+class DoneView(TemplateView):
+    template_name = 'feedback/done.html'
 
 class FeedBackUpdateView(View):
     def get(self, request, id_feedback):
