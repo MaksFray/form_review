@@ -28,6 +28,14 @@ class DoneView(TemplateView):
         context['date'] = '20.02.20'
         return context
 
+class AllFeedbacksView(TemplateView):
+    template_name = 'feedback/feedback_list.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['feedbacks'] = Feedback.objects.all()
+        return context
+
+
 class FeedBackUpdateView(View):
     def get(self, request, id_feedback):
         feed = Feedback.objects.get(id=id_feedback)
