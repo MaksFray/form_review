@@ -23,16 +23,15 @@ class DoneView(View):
     def get(self, request):
         return render(request, 'feedback/done.html')
 
-
-
-def update_feedback(request, id_feedback):
-    feed = Feedback.objects.get(id=id_feedback)
-
-    if request.method == "POST":
+class FeedBackUpdateView(View):
+    def get(self, request, id_feedback):
+        feed = Feedback.objects.get(id=id_feedback)
+        form = FeedbackForm(instance=feed)
+        return render(request, 'feedback/feedback.html', context={'form': form})
+    def post(self, request, id_feedback):
+        feed = Feedback.objects.get(id=id_feedback)
         form = FeedbackForm(request.POST, instance=feed)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/done')
-    else:
-        form = FeedbackForm(instance=feed)
-    return render(request, 'feedback/feedback.html', context={'form': form})
+            return HttpResponseRedirect(f'/{id_feedback}')
+        return render(request, 'feedback/feedback.html', context={'form': form})
