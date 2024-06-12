@@ -137,7 +137,9 @@ table td:last-child {
 }
 
 table td a {
-  color: #3b9eff;
+    color: #3b9eff;
+    display:block;
+    text-decoration:none;
 }
 
 table td a:hover {
@@ -164,4 +166,9 @@ table td a:hover {
 
 .start {
     align: center;
+}
+
+.table a
+{
+
 }

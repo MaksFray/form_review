@@ -7,7 +7,7 @@ All feedbacks
 {% block content %}
     <h2>Your feedbacks</h2>
     <br>
-    <table>
+    <table class="table">
         <tr>
             <th>Имя</th>
             <th>Фамилия</th>
@@ -15,12 +15,16 @@ All feedbacks
             <th>Рейтинг</th>
         </tr>
         {% for item in feedbacks %}
+
         <tr>
-            <td>{{ item.name }}</td>
+
+            <td><a href="detail/{{ item.id }}">{{ item.name }} </a></td>
             <td>{{ item.second_name }}</td>
             <td>{{ item.feedback }}</td>
             <td>{{ item.rating }}</td>
+
         </tr>
+
         {% endfor %}
     </table>
 {% endblock %}
