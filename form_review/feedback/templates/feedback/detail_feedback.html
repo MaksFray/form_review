@@ -1,0 +1,19 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}
+Отзыв {{ name }}
+{% endblock %}
+{% block content %}
+    <h2>
+        {{ feedback.name }}
+    </h2>
+
+    <h2>{{ feedback.name }} {{ feedback.second_name }}</h2>
+    <div class="star">
+        {% for _ in "x"|rjust:feedback.rating %}⭐{% endfor %}
+    </div>
+    <div class='card'>
+        <h2>{{ feedback.feedback|linebreaksbr }}</h2>
+    </div>
+
+{% endblock %}

@@ -155,3 +155,13 @@ table td a:hover {
     padding: 1rem;
   }
 }
+
+.card {
+    min-height: 400px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.start {
+    align: center;
+}

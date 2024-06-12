@@ -35,6 +35,13 @@ class AllFeedbacksView(TemplateView):
         context['feedbacks'] = Feedback.objects.all()
         return context
 
+class DetailFeedBack(TemplateView):
+    template_name = 'feedback/detail_feedback.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['feedback'] = Feedback.objects.get(id=context['id_feedback'])
+        return context
+
 
 class FeedBackUpdateView(View):
     def get(self, request, id_feedback):
