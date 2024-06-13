@@ -4,6 +4,7 @@ from .forms import FeedbackForm
 from .models import Feedback
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -28,12 +29,14 @@ class DoneView(TemplateView):
         context['date'] = '20.02.20'
         return context
 
-class AllFeedbacksView(TemplateView):
+class AllFeedbacksView(ListView):
     template_name = 'feedback/feedback_list.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['feedbacks'] = Feedback.objects.all()
-        return context
+    model = Feedback
+    context_object_name = 'feedbacks'
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filter_gs = queryset.filter(rating__gt=3)
+        return filter_gs
 
 class DetailFeedBack(TemplateView):
     template_name = 'feedback/detail_feedback.html'
