@@ -5,7 +5,7 @@ from .models import Feedback
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic.edit import FormView, CreateView, UpdateView
 
 # Create your views here.
 class FeedBackView(CreateView):
@@ -37,15 +37,9 @@ class DetailFeedBack(DetailView):
     template_name = 'feedback/detail_feedback.html'
     model = Feedback
 
-class FeedBackUpdateView(View):
-    def get(self, request, id_feedback):
-        feed = Feedback.objects.get(id=id_feedback)
-        form = FeedbackForm(instance=feed)
-        return render(request, 'feedback/feedback.html', context={'form': form})
-    def post(self, request, id_feedback):
-        feed = Feedback.objects.get(id=id_feedback)
-        form = FeedbackForm(request.POST, instance=feed)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(f'/{id_feedback}')
-        return render(request, 'feedback/feedback.html', context={'form': form})
+class FeedbackUpdateView(UpdateView):
+    model = Feedback
+    form_class = FeedbackForm
+    template_name = 'feedback/feedback.html'
+    success_url = '/done'
+
