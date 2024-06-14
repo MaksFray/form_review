@@ -5,19 +5,17 @@ from .models import Feedback
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 
 # Create your views here.
+class FeedBackView(FormView):
+    form_class = FeedbackForm
+    template_name = 'feedback/feedback.html'
+    success_url = '/done'
 
-class FeedBackView(View):
-    def get(self, request):
-        form = FeedbackForm()
-        return render(request, 'feedback/feedback.html', context={'form': form})
-
-    def post(self, request):
-        form = FeedbackForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/done')
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
 class DoneView(TemplateView):
@@ -35,8 +33,8 @@ class AllFeedbacksView(ListView):
     context_object_name = 'feedbacks'
     def get_queryset(self):
         queryset = super().get_queryset()
-        filter_gs = queryset.filter(rating__gt=3)
-        return filter_gs
+        # filter_gs = queryset.filter(rating__gt=3)
+        return queryset
 
 class DetailFeedBack(DetailView):
     template_name = 'feedback/detail_feedback.html'
