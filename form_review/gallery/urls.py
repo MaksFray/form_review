@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('load_image', views.FeedBackView.as_view()),
+    path('load_image', views.GalleryView.as_view()),
 ]
