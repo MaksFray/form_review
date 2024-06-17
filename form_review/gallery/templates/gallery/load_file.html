@@ -6,8 +6,9 @@ Load file into the gallery
 
 {% block content %}
     <h2>Load file</h2>
-    <form >
-        <input type="file">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image">
 
 
         <button type="submit">Load</button>
