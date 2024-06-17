@@ -8,9 +8,7 @@ Load file into the gallery
     <h2>Load file</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="image">
-
-
+        {{ form }}
         <button type="submit">Load</button>
     </form>
 {% endblock %}
