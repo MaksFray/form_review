@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseRedirect
 from .forms import GalleryUploadForm
+from .models import Gallery
 # Create your views here.
 
 def storage_file(file):
@@ -19,6 +20,8 @@ class GalleryView(View):
     def post(self, request):
         form = GalleryUploadForm(request.POST, request.FILES)
         if form.is_valid():
+            new_image = Gallery(image=form.cleaned_data['image'])
+            new_image.save()
             storage_file(form.cleaned_data['image'])
             return HttpResponseRedirect('load_image')
         return render(request, 'gallery/load_file.html', context={
