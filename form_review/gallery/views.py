@@ -5,11 +5,6 @@ from .forms import GalleryUploadForm
 from .models import Gallery
 # Create your views here.
 
-def storage_file(file):
-    with open(f'gallery_tmp/{file.name}', 'wb+') as new_file:
-        for chunk in file.chunks():
-            new_file.write(chunk)
-
 class GalleryView(View):
     def get(self, request):
         form = GalleryUploadForm()
@@ -22,7 +17,6 @@ class GalleryView(View):
         if form.is_valid():
             new_image = Gallery(image=form.cleaned_data['image'])
             new_image.save()
-            storage_file(form.cleaned_data['image'])
             return HttpResponseRedirect('load_image')
         return render(request, 'gallery/load_file.html', context={
             'form': form,
