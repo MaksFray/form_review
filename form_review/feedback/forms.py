@@ -1,6 +1,7 @@
 from django import forms
 from .models import Feedback
 
+
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
@@ -14,7 +15,7 @@ class FeedbackForm(forms.ModelForm):
             'feedback': 'Feedback',
         }
         error_messages = {
-            'name':{
+            'name': {
                 'max_length': 'Too many symbols',
                 'min_length': 'Too few symbols',
                 'required': 'Must not be empty',
