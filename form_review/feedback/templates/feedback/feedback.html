@@ -9,13 +9,13 @@
     <form method="post">
         {% csrf_token %}
         {% for field in form %}
-            <div class="form-style {% if field.errors %} errors {% endif %}">
+            <div class="col-form-label col-form-label-lg mt-4 form-style {% if field.errors %} errors {% endif %}">
                 {{ field.label_tag }}
                 {{ field.errors }}
                 {{ field }}
             </div>
         {% endfor %}
 
-        <button type="submit">Send</button>
+        <button class="btn btn-primary" type="submit">Send</button>
     </form>
 {% endblock %}
