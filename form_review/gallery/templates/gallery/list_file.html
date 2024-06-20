@@ -1,0 +1,16 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}
+File in the gallery
+{% endblock %}
+
+{% block content %}
+    <h2>List file</h2>
+    <ul>
+        {% for image in images%}
+            <li>
+                <img src="{{ image.image.url }}" height="400" width="400">
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

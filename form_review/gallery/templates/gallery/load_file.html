@@ -1,0 +1,14 @@
+{% extends 'feedback/base.html' %}
+
+{% block title %}
+Load file into the gallery
+{% endblock %}
+
+{% block content %}
+    <h2>Load file</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Load</button>
+    </form>
+{% endblock %}
